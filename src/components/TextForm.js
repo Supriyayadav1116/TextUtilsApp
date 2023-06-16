@@ -42,6 +42,7 @@ export default function TextForm(props) {
           ></textarea>
           <button
             type="button"
+            disabled={text.length === 0}
             className="btn btn-primary my-2 mx-2"
             onClick={handleButton}
           >
@@ -49,6 +50,7 @@ export default function TextForm(props) {
           </button>
           <button
             type="button"
+            disabled={text.length === 0}
             className="btn btn-primary my-2"
             onClick={handleClear}
           >
@@ -64,10 +66,13 @@ export default function TextForm(props) {
       >
         <h1>Your Text Summary :</h1>
         <p>
-          {text.split(" ").filter((word) => word !== "").length} Words and{" "}
+          {text.split(/\s+/).filter((word) => word !== "").length} Words and{" "}
           {text.length} Characters
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes to read</p>
+        <p>
+          {0.008 * text.split(" ").filter((word) => word !== "").length} Minutes
+          to read
+        </p>
         <h2>Preview</h2>
         <p>
           {text.length > 0
